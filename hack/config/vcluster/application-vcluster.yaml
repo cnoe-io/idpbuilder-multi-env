@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vcluster
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: vcluster
+    repoURL: https://charts.loft.sh
+    targetRevision: 0.0.1
+    helm:
+      valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: default

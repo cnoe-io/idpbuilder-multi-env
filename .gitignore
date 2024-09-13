@@ -1,0 +1,6 @@
+.gitconfig
+bin
+ca.crt
+client.crt
+client.key
+admin.kubeconfig
