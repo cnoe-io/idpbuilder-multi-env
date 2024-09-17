@@ -9,6 +9,6 @@ source ${HACK_DIR}/library.sh
 
 install_go_tools
 
-${IDPBUILDER} create
-
-${KUBECTL} apply -f ${HACK_DIR}/config/vcluster
+${IDPBUILDER} create \
+    -p ${HACK_DIR}/config/cnoe-packages/vcluster \
+    -p ${HACK_DIR}/config/cnoe-packages/deploy-apps

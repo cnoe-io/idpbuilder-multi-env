@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app-deploy
+  namespace: argocd
+spec:
+  destination:
+    namespace: demo-app
+    name: my-vcluster
+  source:
+    repoURL: cnoe://../../demo-app
+    targetRevision: HEAD
+    # with path set to '.' and cnoe://manifests. we are wanting ArgoCD to sync from the ./manifests directory.
+    path: "."
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

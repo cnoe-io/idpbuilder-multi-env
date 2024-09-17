@@ -12,6 +12,15 @@ spec:
     helm:
       releaseName: my-vcluster
       valuesObject:
+        controlPlane:
+          proxy:
+            extraSANs:
+            - my-vcluster.cnoe.localtest.me
+          statefulSet:
+            scheduling:
+              podManagementPolicy: OrderedReady
+        exportKubeConfig:
+          server: https://my-vcluster.cnoe.localtest.me:443
   destination:
     server: https://kubernetes.default.svc
     namespace: vcluster-dev
