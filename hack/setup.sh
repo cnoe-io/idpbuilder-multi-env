@@ -11,4 +11,4 @@ install_go_tools
 
 ${IDPBUILDER} create
 
-kubectl apply -f ${HACK_DIR}/config/vcluster
+${KUBECTL} apply -f ${HACK_DIR}/config/vcluster

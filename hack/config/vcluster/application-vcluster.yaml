@@ -8,10 +8,14 @@ spec:
   source:
     chart: vcluster
     repoURL: https://charts.loft.sh
+    targetRevision: 0.20.0
     helm:
       releaseName: my-vcluster
-      valueFiles:
-        - vcluster.yaml
+      valuesObject:
   destination:
     server: https://kubernetes.default.svc
     namespace: vcluster-dev
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
