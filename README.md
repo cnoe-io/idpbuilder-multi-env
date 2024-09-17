@@ -15,5 +15,5 @@ If you have Go installed, you can run the following:
 Download idpbuilder and execute the following:
 
 ```bash
-idpbuilder -p hack/config/cnoe-packages/vcluster -p hack/config/cnoe-packages/vcluster
+idpbuilder -p hack/config/cnoe-packages/vcluster -p hack/config/cnoe-packages/deploy-apps
 ```
