@@ -9,17 +9,18 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-  name: my-vcluster
-  namespace: vcluster-dev
+  name: vcluster-ingress
+  labels:
+    app.cnoe.io/name: vcluster
 spec:
   ingressClassName: nginx # use your ingress class name
   rules:
-  - host: my-vcluster.cnoe.localtest.me
+  - host: unpatched-vcluster-hostname.cnoe.localtest.me
     http:
       paths:
       - backend:
           service:
-            name: my-vcluster
+            name: vcluster
             port:
               number: 443
         path: /

@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: vclusters
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - name: development
+      - name: staging
+      - name: production
+  template:
+    metadata:
+      name: '{{.name}}-vcluster'
+    spec:
+      project: 'default'
+      source:
+        # idpbuilder doesnt support applicationsets, so we directly reference the package uploaded by our noop application
+        repoURL: https://gitea.cnoe.localtest.me:8443/giteaAdmin/idpbuilder-localdev-config-package-hack.git
+        targetRevision: HEAD
+        path: config/vcluster
+        kustomize:
+          patches:
+          - target:
+              labelSelector: app.cnoe.io/name=vcluster
+              kind: Ingress
+            patch: |-
+              - op: replace
+                path: /spec/rules/0/host
+                value: {{.name}}-vcluster.cnoe.localtest.me
+          - target:
+              labelSelector: app.cnoe.io/name=vcluster
+              kind: Application
+            patch: |-
+              - op: replace
+                path: /metadata/name
+                value: {{.name}}-vcluster-helm
+          - target:
+              labelSelector: app.cnoe.io/name=vcluster
+              kind: Application
+            patch: |-
+              - op: replace
+                path: /spec/source/helm/valuesObject/controlPlane/proxy/extraSANs/0
+                value: {{.name}}-vcluster.cnoe.localtest.me
+          - target:
+              labelSelector: app.cnoe.io/name=vcluster
+              kind: Application
+            patch: |-
+              - op: replace
+                path: /spec/source/helm/valuesObject/exportKubeConfig/server
+                value: https://{{.name}}-vcluster.cnoe.localtest.me:443
+          - target:
+              labelSelector: app.cnoe.io/name=vcluster
+              kind: Application
+            patch: |-
+              - op: replace
+                path: /spec/destination/namespace
+                value: {{.name}}-vcluster
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: '{{.name}}-vcluster'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+        - CreateNamespace=true

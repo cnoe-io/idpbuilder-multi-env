@@ -1,16 +1,17 @@
+# This is a "noop" application which causes the config directory to be pushed
+# to gitea so we can use it from our vcluster application set
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vcluster
+  name: config-package
   namespace: argocd
 spec:
   destination:
-    namespace: vcluster
     server: "https://kubernetes.default.svc"
   source:
     # cnoe:// indicates we want to sync from a local directory.
     # values after cnoe:// is treated as a relative path from this file.
-    repoURL: cnoe://../../vcluster
+    repoURL: cnoe://../../../
     targetRevision: HEAD
     # with path set to '.' and cnoe://manifests. we are wanting ArgoCD to sync from the ./manifests directory.
     path: "."

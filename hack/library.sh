@@ -6,11 +6,13 @@ LOCALBIN=${ROOT_DIR}/bin
 ## Tool Versions
 IDPBUILDER_VERSION=8ab0e10
 KUBECTL_VERSION=v1.31.1
+KUSTOMIZE_VERSION=v5.4.1
 VCLUSTER_VERSION=v0.20.0
 
 ## Tool Binaries
 export IDPBUILDER=${LOCALBIN}/idpbuilder-${IDPBUILDER_VERSION}
 export KUBECTL=${LOCALBIN}/kubectl-${KUBECTL_VERSION}
+export KUSTOMIZE=${LOCALBIN}/kustomize-${KUSTOMIZE_VERSION}
 export VCLUSTER=${LOCALBIN}/vcluster-${VCLUSTER_VERSION}
 
 function go_install_tool() {
@@ -24,6 +26,7 @@ function go_install_tool() {
 
 function install_go_tools() {
     go_install_tool ${IDPBUILDER} github.com/cnoe-io/idpbuilder ${IDPBUILDER_VERSION}
+    go_install_tool ${KUSTOMIZE} sigs.k8s.io/kustomize/kustomize/v5 ${KUSTOMIZE_VERSION}
 
     # Kubectl
     if [ ! -x ${KUBECTL} ]; then

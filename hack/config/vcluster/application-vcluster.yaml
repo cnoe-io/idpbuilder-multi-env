@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-vcluster
+  name: unpatched-vcluster
   namespace: argocd
+  labels:
+    app.cnoe.io/name: vcluster
 spec:
   project: default
   source:
@@ -10,20 +12,19 @@ spec:
     repoURL: https://charts.loft.sh
     targetRevision: 0.20.0
     helm:
-      releaseName: my-vcluster
       valuesObject:
         controlPlane:
           proxy:
             extraSANs:
-            - my-vcluster.cnoe.localtest.me
+            - unpatched-vcluster-hostname.cnoe.localtest.me
           statefulSet:
             scheduling:
               podManagementPolicy: OrderedReady
         exportKubeConfig:
-          server: https://my-vcluster.cnoe.localtest.me:443
+          server: https://unpatched-vcluster-hostname.cnoe.localtest.me:443
   destination:
     server: https://kubernetes.default.svc
-    namespace: vcluster-dev
+    namespace: unpatched-vcluster
   syncPolicy:
     automated: {}
     syncOptions:
