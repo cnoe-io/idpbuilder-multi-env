@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: potatohead-deploy
+  name: podtatohead-deploy
   namespace: argocd
 spec:
   goTemplate: true
@@ -13,17 +13,17 @@ spec:
           workload-class: "app-runtime"
   template:
     metadata:
-      name: potatohead-{{index .metadata.labels "environment-name"}}
+      name: podtatohead-{{index .metadata.labels "environment-name"}}
       namespace: argocd
     spec:
       destination:
         server: '{{.server}}'
-        namespace: potatohead
+        namespace: podtatohead
       source:
         repoURL: cnoe://../../
         targetRevision: HEAD
         # with path set to '.' and cnoe://manifests. we are wanting ArgoCD to sync from the ./manifests directory.
-        path: workloads/keptn-potatohead
+        path: workloads/keptn-podtatohead
       project: default
       syncPolicy:
         automated:
