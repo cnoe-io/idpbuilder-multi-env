@@ -1,4 +1,6 @@
-environments=("development" "staging" "production")
+#! /bin/bash
+
+environments=("development" "production")
 
 for env in "${environments[@]}"; do
     export cluster_name=$env
