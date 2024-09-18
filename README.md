@@ -36,5 +36,5 @@ See the output from Step 1 to see how to connect to argocd. Typically, you can b
 The easiest way to deploy a sample workload is to run `idpbuilder create` with the workload added as an extra package. Assuming you used the Go-based setup script, here is an example:
 
 ```bash
-./bin/idpbuilder-8ab0e10 create -p config/cnoe-packages -p config/workloads/simple-podtatohead`
+./bin/idpbuilder-8ab0e10 create -p config/cnoe-packages -p config/workloads/simple-podtatohead
 ```
