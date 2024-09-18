@@ -20,10 +20,10 @@ spec:
         server: '{{.server}}'
         namespace: demo-app
       source:
-        repoURL: https://gitea.cnoe.localtest.me:8443/giteaAdmin/idpbuilder-localdev-config-package-hack.git
+        repoURL: cnoe://../
         targetRevision: HEAD
         # with path set to '.' and cnoe://manifests. we are wanting ArgoCD to sync from the ./manifests directory.
-        path: "config/demo-app"
+        path: "demo-app"
       project: default
       syncPolicy:
         automated:

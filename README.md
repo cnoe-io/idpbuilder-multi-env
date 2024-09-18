@@ -19,7 +19,7 @@ If you have Go installed, you can run the following:
 Download idpbuilder and execute the following:
 
 ```bash
-idpbuilder -p hack/config/cnoe-packages/config-package -p hack/config/cnoe-packages/vcluster-generator
+idpbuilder -p hack/config/vcluster-generator -p hack/config/deploy-apps
 ```
 
 ## Step 2: Enroll vclusters in ArgoCD
@@ -62,12 +62,4 @@ EOF
 
 ```bash
 kubectl apply -f cluster-secret.yaml
-```
-
-## Step 3: Deploy workloads
-
-You can start with a demo workload which uses an applicationset cluster generator:
-
-```bash
-kubectl apply -f hack/config/deploy-apps
 ```
