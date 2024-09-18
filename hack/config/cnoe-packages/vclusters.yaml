@@ -18,10 +18,9 @@ spec:
     spec:
       project: 'default'
       source:
-        # idpbuilder doesnt support applicationsets, so we directly reference the package uploaded by our noop application
-        repoURL: https://gitea.cnoe.localtest.me:8443/giteaAdmin/idpbuilder-localdev-config-package-hack.git
+        repoURL: cnoe://../
         targetRevision: HEAD
-        path: config/vcluster
+        path: vcluster
         kustomize:
           patches:
           - target:
