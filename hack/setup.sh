@@ -12,3 +12,6 @@ install_go_tools
 ${IDPBUILDER} create \
     -p ${HACK_DIR}/config/cnoe-packages/config-package \
     -p ${HACK_DIR}/config/cnoe-packages/vcluster-generator
+
+chmod +x ${HACK_DIR}/add-vclusters.sh
+${HACK_DIR}/add-vclusters.sh
