@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-app-deploy
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          workload-class: "app-runtime"
+  template:
+    metadata:
+      name: demo-app-{{index .metadata.labels "environment-name"}}
+      namespace: argocd
+    spec:
+      destination:
+        server: '{{.server}}'
+        namespace: demo-app
+      source:
+        repoURL: https://gitea.cnoe.localtest.me:8443/giteaAdmin/idpbuilder-localdev-config-package-hack.git
+        targetRevision: HEAD
+        # with path set to '.' and cnoe://manifests. we are wanting ArgoCD to sync from the ./manifests directory.
+        path: "config/demo-app"
+      project: default
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
