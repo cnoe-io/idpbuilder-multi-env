@@ -1,0 +1,6 @@
+resources:
+- ../../base
+
+images:
+- name: ghcr.io/podtato-head/podtato-server
+  newTag: v0.3.0
