@@ -18,7 +18,7 @@ spec:
     spec:
       project: 'default'
       source:
-        repoURL: cnoe://..
+        repoURL: cnoe://../
         targetRevision: HEAD
         path: vcluster
         kustomize:

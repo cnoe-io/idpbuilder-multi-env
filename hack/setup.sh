@@ -10,5 +10,4 @@ source ${HACK_DIR}/library.sh
 install_go_tools
 
 ${IDPBUILDER} create \
-    -p ${HACK_DIR}/config/vcluster-generator \
-    -p ${HACK_DIR}/config/deploy-apps
+    -p ${HACK_DIR}/config/cnoe-packages
