@@ -22,7 +22,7 @@ Download idpbuilder and execute the following:
 idpbuilder -p hack/config/cnoe-packages/config-package -p hack/config/cnoe-packages/vcluster-generator
 ```
 
-### Step 2: Enroll vclusters in ArgoCD
+## Step 2: Enroll vclusters in ArgoCD
 
 For each cluster created (development, staging, production), do:
 
@@ -64,7 +64,7 @@ EOF
 kubectl apply -f cluster-secret.yaml
 ```
 
-### Step 3: Deploy workloads
+## Step 3: Deploy workloads
 
 You can start with a demo workload which uses an applicationset cluster generator:
 
