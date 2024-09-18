@@ -1,6 +1,6 @@
 #! /bin/bash
 
-environments=("development" "production")
+environments=("staging" "production")
 
 for env in "${environments[@]}"; do
     export cluster_name=$env
@@ -41,3 +41,5 @@ stringData:
       }
     }
 EOF
+
+done

@@ -5,13 +5,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: podtato-head-frontend
+      app.kubernetes.io/name: podtato-head-frontend
   template:
     metadata:
       labels:
         app.kubernetes.io/name: podtato-head-frontend
-        app.kubernetes.io/part-of: podtato-head
-        app.kubernetes.io/version: 0.1.0
     spec:
       containers:
         - env:
@@ -27,14 +25,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: podtato-head-hat
+      app.kubernetes.io/name: podtato-head-hat
   replicas: 1
   template:
     metadata:
       labels:
         app.kubernetes.io/name: podtato-head-hat
-        app.kubernetes.io/part-of: podtato-head
-        app.kubernetes.io/version: 0.1.1
     spec:
       containers:
         - env:
