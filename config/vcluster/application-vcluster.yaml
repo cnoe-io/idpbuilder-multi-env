@@ -13,7 +13,14 @@ spec:
     targetRevision: 0.20.0
     helm:
       valuesObject:
+        sync:
+          fromHost:
+            nodes:
+              enabled: true # Required for virtualScheduler
         controlPlane:
+          advanced:
+            virtualScheduler: # For Keptn support: https://keptn.sh/stable/docs/installation/configuration/vcluster/
+              enabled: true
           proxy:
             extraSANs:
             - unpatched-vcluster-hostname.cnoe.localtest.me

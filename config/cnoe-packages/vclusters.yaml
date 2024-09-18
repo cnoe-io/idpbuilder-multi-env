@@ -9,12 +9,13 @@ spec:
   generators:
   - list:
       elements:
-      - name: development
       - name: staging
       - name: production
   template:
     metadata:
       name: '{{.name}}-vcluster'
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io # enabling cascading deletion
     spec:
       project: 'default'
       source:

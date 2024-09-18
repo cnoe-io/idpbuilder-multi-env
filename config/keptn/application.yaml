@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: keptn
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          workload-class: "app-runtime"
+  template:
+    metadata:
+      name: keptn-{{index .metadata.labels "environment-name"}}
+      namespace: argocd
+      labels:
+        app.cnoe.io/name: keptn
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io # enabling cascading deletion
+    spec:
+      project: default
+      source:
+        chart: keptn
+        repoURL: https://charts.lifecycle.keptn.sh
+        targetRevision: 0.8.0
+        helm:
+          parameters:
+          - name: "commitID"
+            value: "$ARGOCD_APP_REVISION"
+      destination:
+        server: '{{.server}}'
+        namespace: keptn-system
+      syncPolicy:
+        automated: {}
+        syncOptions:
+        - CreateNamespace=true

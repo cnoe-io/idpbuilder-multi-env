@@ -19,7 +19,7 @@ If you have Go installed, you can run the following:
 Download idpbuilder and execute the following:
 
 ```bash
-idpbuilder -p hack/config/cnoe-packages
+idpbuilder -p config/cnoe-packages
 ```
 
 ## Step 2: Enroll vclusters in ArgoCD
